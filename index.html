@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#f5f6f8">
 <title>한자 퀴즈</title>
 
@@ -51,7 +51,7 @@ button:disabled { opacity: .4; }
 .wrap {
   max-width: 850px;
   margin: auto;
-  padding: 16px 14px calc(22px + env(safe-area-inset-bottom));
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
 }
 
 .top {
@@ -59,10 +59,10 @@ button:disabled { opacity: .4; }
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
 }
 
-.top h1 { font-size: 23px; margin: 0; }
+.top h1 { font-size: 20px; margin: 0; }
 
 .sub, .hint {
   color: var(--muted);
@@ -73,8 +73,8 @@ button:disabled { opacity: .4; }
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 18px;
-  padding: 16px;
-  margin-bottom: 13px;
+  padding: 14px;
+  margin-bottom: 10px;
 }
 
 .label {
@@ -109,9 +109,15 @@ button:disabled { opacity: .4; }
 
 .row > * { flex: 1; }
 
-.hint { line-height: 1.5; }
+.hint { line-height: 1.4; }
 
 .hidden { display: none !important; }
+
+/* --- 퀴즈 화면 키보드 대응 레이아웃 --- */
+#quiz .panel {
+  padding: 12px 14px;
+  margin-bottom: 0;
+}
 
 .quizHead {
   display: flex;
@@ -119,33 +125,33 @@ button:disabled { opacity: .4; }
   align-items: center;
   color: var(--muted);
   font-size: 13px;
-  margin-bottom: 14px;
+  margin-bottom: 4px;
 }
 
 .prompt {
-  font-size: clamp(25px, 5vw, 42px);
+  font-size: clamp(22px, 4.5vw, 36px);
   font-weight: 800;
-  line-height: 1.25;
+  line-height: 1.2;
   text-align: center;
-  padding: 12px 0 18px;
+  padding: 4px 0 8px;
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
 
-.hanziPrompt { font-size: 70px; }
+.hanziPrompt { font-size: clamp(48px, 9vw, 64px); }
 
 .answerLabel {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--muted);
-  margin-bottom: 7px;
+  margin-bottom: 4px;
 }
 
 .answer {
   width: 100%;
   border: 2px solid var(--line);
-  border-radius: 14px;
-  padding: 14px;
-  font-size: 22px;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 18px;
   outline: none;
   background: #fff;
   color: var(--ink);
@@ -154,11 +160,12 @@ button:disabled { opacity: .4; }
 .answer:focus { border-color: var(--blue); }
 
 .feedback {
-  padding: 12px;
-  border-radius: 12px;
+  padding: 8px 10px;
+  border-radius: 10px;
   background: #f0f3f7;
-  line-height: 1.5;
-  margin-top: 12px;
+  line-height: 1.4;
+  margin-top: 8px;
+  font-size: 14px;
   white-space: pre-line;
   overflow-wrap: anywhere;
 }
@@ -174,25 +181,25 @@ button:disabled { opacity: .4; }
 }
 
 .wordTip {
-  font-size: 14px;
+  font-size: 13px;
   color: #3e4a5a;
-  margin-top: 10px;
-  line-height: 1.6;
+  margin-top: 6px;
+  line-height: 1.4;
 }
 
 .controls {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   gap: 8px;
-  margin-top: 12px;
+  margin-top: 8px;
 }
 
 .progress {
-  height: 6px;
+  height: 5px;
   background: #e6eaf0;
   border-radius: 99px;
   overflow: hidden;
-  margin: 8px 0 14px;
+  margin: 4px 0 8px;
 }
 
 .progress span {
@@ -224,18 +231,21 @@ footer {
 }
 
 @media (min-width: 650px) {
-  .wrap { padding-top: 24px; }
-  .panel { padding: 20px; }
+  .wrap { padding-top: 16px; }
   .ranges { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 }
 
-@media (max-height: 700px) {
-  .wrap { padding-top: 8px; }
-  .panel { padding: 12px; margin-bottom: 9px; }
-  .prompt { padding: 5px 0 10px; }
-  .hanziPrompt { font-size: 56px; }
-  .answer { padding: 10px; font-size: 20px; }
-  .quizHead { margin-bottom: 7px; }
+/* 화면 높이가 줄어들었을 때 (키보드가 올라왔을 때 포함) 간격 자동 축소 */
+@media (max-height: 750px) {
+  .wrap { padding-top: 4px; }
+  .top { margin-bottom: 4px; }
+  .top h1 { font-size: 18px; }
+  .prompt { padding: 2px 0 4px; }
+  .hanziPrompt { font-size: 46px; }
+  .answer { padding: 8px 10px; font-size: 17px; }
+  .quizHead { margin-bottom: 2px; }
+  .progress { margin: 2px 0 6px; }
+  .hint { font-size: 12px; }
 }
 </style>
 </head>
@@ -336,7 +346,7 @@ footer {
 
     <div id="prompt" class="prompt"></div>
     <div id="extraPrompt" class="hint"
-      style="text-align:center;margin-bottom:10px"></div>
+      style="text-align:center;margin-bottom:6px"></div>
 
     <div class="answerLabel" id="answerLabel">
       정답 입력 (띄어쓰기 없이)
@@ -358,7 +368,7 @@ footer {
       <button class="primary" id="checkNext">정답 확인 · Enter</button>
     </div>
 
-    <div class="hint" style="margin-top:10px">
+    <div class="hint" style="margin-top:6px">
       이전 문제로 돌아가면 이미 확인한 정답과 입력 내용을 다시 볼 수 있습니다.
     </div>
   </div>
@@ -383,8 +393,6 @@ footer {
 <script>
 // ==================================================
 // 한자 데이터
-// 형식: [한자, 음훈, [가능한 음]]
-// 범위는 배열 순서대로 10개씩 나뉩니다.
 // ==================================================
 
 const HANJA = [
@@ -546,7 +554,7 @@ const HANJA = [
 ['能','능할 능',['능']],
 ['多','많을 다',['다']],
 ['丹','붉을 단',['단']],
-['但','다만 단',['단']],
+['하지만','다만 단',['단']],
 ['單','홑 단',['단']],
 ['短','짧을 단',['단']],
 ['端','끝 단',['단']],
@@ -831,9 +839,6 @@ const HANJA = [
 
 // ==================================================
 // 단어 데이터
-// 형식: [한자 단어, 읽는 음, 글자별 음훈]
-// 중요: 아래는 예시 데이터입니다. 모든 단어가
-// 사용자의 한자 목록에 포함되는 것은 아닙니다.
 // ==================================================
 
 const WORDS = [
@@ -881,7 +886,7 @@ const WORDS = [
 ['病院','병원','병병+집원'],
 ['時間','시간','때시+사이간'],
 ['始作','시작','비로소시+지을작'],
-['使用','사용','부릴사+쓸용'],
+['사용','사용','부릴사+쓸용'],
 ['成功','성공','이룰성+공공'],
 ['速度','속도','빠를속+법도도'],
 ['運動','운동','옮길운+움직일동'],
@@ -917,12 +922,10 @@ const normalize = s =>
 
 function shuffle(arr) {
   const a = [...arr];
-
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
-
   return a;
 }
 
@@ -932,34 +935,27 @@ function renderRanges() {
 
   for (let i = 0; i < total; i++) {
     const b = document.createElement('button');
-
     b.className = 'range' + (selected.has(i) ? ' on' : '');
-    b.textContent =
-      `${i * 10 + 1}–${Math.min((i + 1) * 10, HANJA.length)}`;
+    b.textContent = `${i * 10 + 1}–${Math.min((i + 1) * 10, HANJA.length)}`;
 
     b.onclick = () => {
       if (selected.has(i)) selected.delete(i);
       else selected.add(i);
-
       renderRanges();
     };
 
     $('ranges').appendChild(b);
   }
 
-  $('rangeInfo').textContent =
-    `현재 등록: ${HANJA.length}자 · ${total}개 범위`;
+  $('rangeInfo').textContent = `현재 등록: ${HANJA.length}자 · ${total}개 범위`;
 }
 
 function selectedChars() {
-  return HANJA.filter((_, i) =>
-    selected.has(Math.floor(i / 10))
-  );
+  return HANJA.filter((_, i) => selected.has(Math.floor(i / 10)));
 }
 
 function chooseMode(m) {
   mode = m;
-
   document.querySelectorAll('.mode').forEach(b => {
     b.classList.toggle('on', b.dataset.mode === m);
   });
@@ -970,10 +966,7 @@ document.querySelectorAll('.mode').forEach(b => {
 });
 
 $('allRanges').onclick = () => {
-  selected = new Set(
-    Array.from({length: Math.ceil(HANJA.length / 10)}, (_, i) => i)
-  );
-
+  selected = new Set(Array.from({length: Math.ceil(HANJA.length / 10)}, (_, i) => i));
   renderRanges();
 };
 
@@ -993,9 +986,7 @@ function buildQuestions() {
       prompt: x[0],
       answer: x[1].replaceAll(' / ', '/'),
       hint: '뜻과 음을 띄어쓰기 없이 입력하세요.',
-      words: WORDS
-        .filter(w => w[0].includes(x[0]))
-        .map(w => `${w[0]} (${w[1]})`)
+      words: WORDS.filter(w => w[0].includes(x[0])).map(w => `${w[0]} (${w[1]})`)
     }));
   }
 
@@ -1034,10 +1025,7 @@ function buildQuestions() {
         return {
           type: mode,
           key: s,
-          prompt: shuffle(unique)
-            .slice(0, Math.min(4, unique.length))
-            .map(x => x[0])
-            .join('　'),
+          prompt: shuffle(unique).slice(0, Math.min(4, unique.length)).map(x => x[0]).join('　'),
           answer: s,
           hint: '제시된 한자들의 공통 음을 입력하세요.',
           all: unique.map(x => `${x[0]} ${x[1]}`)
@@ -1048,7 +1036,6 @@ function buildQuestions() {
   if ($('order').value === 'random') q = shuffle(q);
 
   const count = $('count').value;
-
   return count === 'all' ? q : q.slice(0, Number(count));
 }
 
@@ -1061,22 +1048,18 @@ function startQuiz(overrideQuestions = null) {
         ? '선택한 범위에 해당하는 등록 단어가 없습니다. 다른 범위를 선택해 주세요.'
         : '문제를 만들 수 없습니다. 범위를 선택해 주세요.'
     );
-
     return;
   }
 
   idx = 0;
-
   records = questions.map(() => ({
     input: '',
     checked: false,
     correct: false
   }));
 
-  $('setup').classList.add('hidden');
-  $('results').classList.add('hidden');
-  $('quiz').classList.remove('hidden');
-  $('homeBtn').classList.remove('hidden');
+  $('setup').classList.add('hidden');$('results').classList.add('hidden');
+  $('quiz').classList.remove('hidden');$('homeBtn').classList.remove('hidden');
 
   renderQuestion();
 }
@@ -1092,30 +1075,22 @@ function renderQuestion() {
     soundGroup: '같은 음 찾기'
   };
 
-  $('modeName').textContent = names[mode];
-  $('counter').textContent = `${idx + 1} / ${questions.length}`;
+  $('modeName').textContent = names[mode];$('counter').textContent = `${idx + 1} / ${questions.length}`;
 
-  $('progress').style.width =
-    `${((idx + 1) / questions.length) * 100}%`;
+  $('progress').style.width = `${((idx + 1) / questions.length) * 100}%`;
 
   $('prompt').textContent = q.prompt;
-
-  $('prompt').className =
-    'prompt' + (mode === 'char' ? ' hanziPrompt' : '');
+  $('prompt').className = 'prompt' + (mode === 'char' ? ' hanziPrompt' : '');
 
   $('extraPrompt').textContent = q.hint;
 
-  $('answerLabel').textContent =
-    mode === 'char'
-      ? '정답 입력 (띄어쓰기 없이)'
-      : '정답 입력';
+  $('answerLabel').textContent = mode === 'char' ? '정답 입력 (띄어쓰기 없이)' : '정답 입력';
 
   $('answer').value = r.input;
   $('answer').disabled = r.checked;
 
   $('feedback').className = 'feedback hidden';
-  $('feedback').textContent = '';
-  $('wordTip').textContent = '';
+  $('feedback').textContent = '';$('wordTip').textContent = '';
 
   $('back').disabled = idx === 0;
 
@@ -1127,8 +1102,11 @@ function renderQuestion() {
 
   if (!r.checked) {
     setTimeout(() => {
-      $('answer').focus({preventScroll: true});
-    }, 30);
+      const inputEl = $('answer');
+      inputEl.focus({preventScroll: true});
+      // 아이패드 가상 키보드 가림 방지: 화면 중앙으로 부드럽게 스크롤
+      inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
   }
 }
 
@@ -1143,12 +1121,10 @@ function check() {
     } else {
       showResults();
     }
-
     return;
   }
 
   r.input = $('answer').value.trim();
-
   r.correct = normalize(r.input) === normalize(q.answer);
   r.checked = true;
 
@@ -1161,8 +1137,6 @@ function check() {
       ? '결과 보기 · Enter'
       : '다음 문제 · Enter';
 
-  // 정답 확인 후에도 입력창의 초점을 유지합니다.
-  // 다음 문제로 넘어갈 때까지 키보드를 계속 사용할 수 있습니다.
   $('answer').focus({preventScroll: true});
 }
 
@@ -1170,20 +1144,13 @@ function showFeedback() {
   const q = questions[idx];
   const r = records[idx];
 
-  $('feedback').className =
-    'feedback ' + (r.correct ? 'good' : 'bad');
-
-  $('feedback').textContent =
-    (r.correct ? '정답입니다!' : '오답입니다.') +
-    '\n정답: ' + q.answer;
+  $('feedback').className = 'feedback ' + (r.correct ? 'good' : 'bad');
+  $('feedback').textContent = (r.correct ? '정답입니다!' : '오답입니다.') + '\n정답: ' + q.answer;
 
   if (q.type === 'char' && q.words && q.words.length) {
-    $('wordTip').textContent =
-      '이 한자가 들어가는 단어: ' +
-      q.words.slice(0, 6).join(' · ');
+    $('wordTip').textContent = '이 한자가 들어가는 단어: ' + q.words.slice(0, 6).join(' · ');
   } else if (q.type === 'soundGroup') {
-    $('wordTip').textContent =
-      '이 음을 가진 한자: ' + q.all.join(' / ');
+    $('wordTip').textContent = '이 음을 가진 한자: ' + q.all.join(' / ');
   } else {
     $('wordTip').textContent = '';
   }
@@ -1191,8 +1158,7 @@ function showFeedback() {
 
 function showResults() {
   $('quiz').classList.add('hidden');
-  $('results').classList.remove('hidden');
-  $('homeBtn').classList.add('hidden');
+  $('results').classList.remove('hidden');$('homeBtn').classList.add('hidden');
 
   const correct = records.filter(r => r.correct).length;
 
@@ -1220,15 +1186,13 @@ function showResults() {
             내 답: ${escapeHTML(x.r.input || '(입력 없음)')}<br>
             정답: ${escapeHTML(x.q.answer)}
           </span><br>
-          <button style="margin-top:7px"
-            onclick="reviewOne(${x.i})">
+          <button style="margin-top:7px" onclick="reviewOne(${x.i})">
             이 문제 다시 보기
           </button>
         </div>
       `).join('');
   } else {
-    $('resultList').innerHTML =
-      '<div class="feedback good">모든 문제를 맞혔어요!</div>';
+    $('resultList').innerHTML = '<div class="feedback good">모든 문제를 맞혔어요!</div>';
   }
 
   $('retryWrong').disabled = !wrong.length;
@@ -1269,20 +1233,16 @@ $('back').onclick = () => {
 $('homeBtn').onclick = () => {
   if (confirm('퀴즈를 중단하고 설정으로 돌아갈까요?')) {
     $('quiz').classList.add('hidden');
-    $('setup').classList.remove('hidden');
-    $('homeBtn').classList.add('hidden');
+    $('setup').classList.remove('hidden');$('homeBtn').classList.add('hidden');
   }
 };
 
 $('restart').onclick = () => {
-  $('results').classList.add('hidden');
-  $('setup').classList.remove('hidden');
+  $('results').classList.add('hidden');$('setup').classList.remove('hidden');
 };
 
 $('retryWrong').onclick = () => {
-  const wrongQuestions = questions
-    .filter((q, i) => !records[i].correct);
-
+  const wrongQuestions = questions.filter((q, i) => !records[i].correct);
   startQuiz(wrongQuestions);
 };
 
